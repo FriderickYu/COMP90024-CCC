@@ -6,3 +6,5 @@
 [MPI的使用方法，欧阳大姐推荐](https://rabernat.github.io/research_computing/parallel-programming-with-mpi-for-python.html)
 
 [Spartan官方文档](https://dashboard.hpc.unimelb.edu.au/)
+
+[上交HPC文档](https://docs.hpc.sjtu.edu.cn/index.html)
