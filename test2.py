@@ -52,8 +52,7 @@ def distinguish_one_line(line_data, grids, smallest_point):
    for i in list(grids):
        if whether_in_grid(line_data["doc"]["coordinates"]['coordinates'], ast.literal_eval(i)):
            return line_data["doc"]["lang"], grids[i]
-       else:
-           return False
+   return False
    #
    #return language, grid_id
 
@@ -84,11 +83,11 @@ if __name__ == '__main__':
         n=2
         while n<5000:
             n=n+1
-            line = f.readline()
+            line = f.readline().strip()
             if line:
                 #print('line:',line)
                 #print(''r' + line[:-2]:','r' + line[:-1])
-                line_data = json.loads(line[:-2])
+                line_data = json.loads(line[:-1])
                 if line_data["doc"]["coordinates"] != None and distinguish_one_line(line_data, grids, smallest_point) != False:
                     language, grid_id = distinguish_one_line(line_data, grids, smallest_point)
                     result_dict = sum_the_output(result_dict, language, grid_id)
