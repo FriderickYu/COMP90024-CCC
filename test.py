@@ -78,5 +78,6 @@ def read_data(twitter_file_path, grid_file_path):
                 pass
         print(grids[j], sum(twitter_dict.values()), len(list(twitter_dict)), ','.join(top_10_list))
 
-def main(twitter_file_path, grid_file_path):
-    read_data(twitter_file_path, grid_file_path)
+if __name__ == '__main__':
+    def main(twitter_file_path, grid_file_path):
+        read_data(twitter_file_path, grid_file_path)
