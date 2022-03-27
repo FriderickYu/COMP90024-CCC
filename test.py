@@ -1,5 +1,6 @@
 import json
 import ast
+import pandas as pd
 
 #the function that check whether this block in this grid
 def whether_in_grid(point, grid):
@@ -55,7 +56,11 @@ def read_data(twitter_file_path, grid_file_path):
 
 
     #print the result
-    print(' Cell     #Total Tweets  #Number of language used    #Top 10 Languages & #Tweets')
+    result_list=[]
+    pd.set_option('display.colheader_justify', 'center')
+    pd.set_option('max_colwidth',100)
+    #df = pd.DataFrame(data, columns=["Cell", "#Total Tweets", "#Number of language used", "#Top 10 Languages & #Tweets"])
+    #print(' Cell     #Total Tweets  #Number of language used    #Top 10 Languages & #Tweets')
 
     #compute the result
     for j in list(grids):
@@ -76,8 +81,16 @@ def read_data(twitter_file_path, grid_file_path):
                 top_10_list.append(str(language_dict[l]) + '-' + str(m))
             else:
                 pass
-        print(grids[j], sum(twitter_dict.values()), len(list(twitter_dict)), ','.join(top_10_list))
+        #print(grids[j], sum(twitter_dict.values()), len(list(twitter_dict)), ','.join(top_10_list))
+        result_list.append([int(grids[j]), sum(twitter_dict.values()), len(list(twitter_dict)), ','.join(top_10_list)])
+    df = pd.DataFrame(result_list, columns=["Cell", "#Total Tweets", "#Number of language used", "#Top 10 Languages & #Tweets"])
+    # 行索引从1开始（原来的索引+1）
+    df.index = df.index + 1
+    print(df)
 
 if __name__ == '__main__':
-    def main(twitter_file_path, grid_file_path):
-        read_data(twitter_file_path, grid_file_path)
+    #def main(twitter_file_path, grid_file_path):
+        #read_data(twitter_file_path, grid_file_path)
+    read_data('./smallTwitter.json','./sydGrid.json')
+
+#main('./smallTwitter.json','./sydGrid.json')
