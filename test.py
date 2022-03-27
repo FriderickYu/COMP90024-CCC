@@ -21,7 +21,7 @@ def read_data(twitter_file_path, grid_file_path):
     #with open('./sydGrid.json', 'r', encoding="utf-8") as g:
     with open(str(grid_file_path), 'r', encoding="utf-8") as g:
         grid_data = json.load(g)
-    return data, grid_data
+    #return data, grid_data
 
 
     #language types
