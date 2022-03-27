@@ -8,3 +8,5 @@
 [Spartan官方文档](https://dashboard.hpc.unimelb.edu.au/)
 
 [上交HPC文档](https://docs.hpc.sjtu.edu.cn/index.html)
+
+[MPI Tutorial](https://mpitutorial.com/tutorials/mpi-introduction/zh_cn/)
