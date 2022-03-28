@@ -77,7 +77,7 @@ def result_output(result_dict, language_dict):
     for i in list(result_dict):
         top_10_dict = result_dict[i][1]
         #sort the dict
-        top_10_dict = {k: v for k, v in sorted(twitter_dict.items(), key=lambda item: item[1])}
+        top_10_dict = {k: v for k, v in sorted(top_10_dict.items(), key=lambda item: item[1])}
         top_10_list = []
         #get top 10 languages and tweets number
         for i in range(10):
