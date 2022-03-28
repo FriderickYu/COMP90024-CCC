@@ -77,7 +77,7 @@ def result_output(result_dict, language_dict):
     for i in list(result_dict):
         top_10_dict = result_dict[i][1]
         #sort the dict
-        top_10_dict = {k: v for k, v in sorted(top_10_dict.items(), key=lambda item: item[1])}
+        top_10_dict = {k: v for k, v in sorted(top_10_dict.items(), key=lambda item: item[1], reverse=True)}
         top_10_list = []
         #get top 10 languages and tweets number
         if len(list(top_10_dict))>=10:
@@ -95,7 +95,7 @@ def result_output(result_dict, language_dict):
                     top_10_list.append(list(top_10_dict)[j] + '-' + str(top_10_dict[list(top_10_dict)[j]]))
         result_list.append([int(i), result_dict[i][0], len(list(result_dict[i][1])), ','.join(top_10_list)])
     pd.set_option('display.colheader_justify', 'center')
-    pd.set_option('max_colwidth',100)
+    pd.set_option('max_colwidth', 200)
     df = pd.DataFrame(result_list, columns=["Cell", "#Total Tweets", "#Number of language used", "#Top 10 Languages & #Tweets"])
     # 行索引从1开始（原来的索引+1）
     df.index = df.index + 1
