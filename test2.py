@@ -78,10 +78,10 @@ if __name__ == '__main__':
     grids, smallest_point = process_grid(grid_data)
     result_dict={}
     
-    with open('./smallTwitter.json', 'r', encoding="utf-8") as f:
+    with open('./bigTwitter.json', 'r', encoding="utf-8") as f:
         f.readline()
-        n=2
-        while n<5000:
+        n = 2
+        while n<4057524:
             n=n+1
             line = f.readline().strip()
             if line:
