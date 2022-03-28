@@ -80,11 +80,19 @@ def result_output(result_dict, language_dict):
         top_10_dict = {k: v for k, v in sorted(top_10_dict.items(), key=lambda item: item[1])}
         top_10_list = []
         #get top 10 languages and tweets number
-        for i in range(10):
-            if list(top_10_dict)[i] in language_dict:
-                top_10_list.append(language_dict[list(top_10_dict)[i]] + '-' + str(top_10_dict[list(top_10_dict)[i]]))
-            else:
-                top_10_list.append(list(top_10_dict)[i] + '-' + str(top_10_dict[list(top_10_dict)[i]]))
+        if len(list(top_10_dict))>=10:
+            for j in range(10):
+                if list(top_10_dict)[j] in language_dict:
+                    top_10_list.append(language_dict[list(top_10_dict)[j]] + '-' + str(top_10_dict[list(top_10_dict)[j]]))
+                else:
+                    top_10_list.append(list(top_10_dict)[j] + '-' + str(top_10_dict[list(top_10_dict)[j]]))
+                #result_list.append([int(i), result_dict[i][0], len(list(result_dict[i][1])), ','.join(top_10_list)])
+        else:
+            for j in range(len(list(top_10_dict))):
+                if list(top_10_dict)[j] in language_dict:
+                    top_10_list.append(language_dict[list(top_10_dict)[j]] + '-' + str(top_10_dict[list(top_10_dict)[j]]))
+                else:
+                    top_10_list.append(list(top_10_dict)[j] + '-' + str(top_10_dict[list(top_10_dict)[j]]))
         result_list.append([int(i), result_dict[i][0], len(list(result_dict[i][1])), ','.join(top_10_list)])
     pd.set_option('display.colheader_justify', 'center')
     pd.set_option('max_colwidth',100)
