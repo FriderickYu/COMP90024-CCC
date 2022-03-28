@@ -3,6 +3,7 @@ import ast
 import pandas as pd
 from mpi4py import MPI
 
+#reference: https://github.com/jeanabanto/CCC-Assignment-1
 #the function that checks whether this block is in this grid
 def whether_in_grid(point, grid):
     if point[0] <= grid[0][0]:
