@@ -110,8 +110,8 @@ if __name__ == '__main__':
     with open('./bigTwitter.json', 'r', encoding="utf-8") as f:
         f.readline()
         n = 2
-        while n<4057524:
-            n=n+1
+        while n < 4057524:
+            n = n + 1
             line = f.readline().strip()
             if line:
                 #print('line:',line)
