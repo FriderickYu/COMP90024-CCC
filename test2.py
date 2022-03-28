@@ -72,6 +72,24 @@ def sum_the_output(result_dict, language, grid_id):
         result_dict[grid_id] = [Total_Tweets, language_dict]
     return result_dict
 
+def result_output(result_dict, language_dict):
+    result_list = []
+    for i in list(result_dict):
+        top_10_dict = result_dict[i][1]
+        #sort the dict
+        top_10_dict = {k: v for k, v in sorted(twitter_dict.items(), key=lambda item: item[1])}
+        top_10_list = []
+        #get top 10 languages and tweets number
+        for i in range(10):
+            top_10_list.append(language_dict[list(top_10_dict)[i]] + '-' + str(top_10_dict[list(top_10_dict)[i]]))
+        result_list.append([int(i), result_dict[i][0], len(list(result_dict[i][1])), ','.join(top_10_list)])
+    pd.set_option('display.colheader_justify', 'center')
+    pd.set_option('max_colwidth',100)
+    df = pd.DataFrame(result_list, columns=["Cell", "#Total Tweets", "#Number of language used", "#Top 10 Languages & #Tweets"])
+    # 行索引从1开始（原来的索引+1）
+    df.index = df.index + 1
+    print(df)
+
 if __name__ == '__main__':
     language_dict = {'en': 'English', 'ar': 'Arabic', 'bn': 'Bengali', 'cs': 'Czech', 'da': 'Danish', 'de': 'German', 'el': 'Greek','es': 'Spanish', 'fa': 'Persian', 'fi': 'Finnish', 'fil': 'Filipino', 'fr': 'French', 'he': 'Hebrew', 'hi': 'Hindi', 'hu': 'Hungarian', 'id': 'Indonesian', 'it': 'Italian', 'ja': 'Japanese', 'ko': 'Korean', 'msa': 'Malay', 'nl': 'Dutch', 'no': 'Norwegian', 'pl': 'Polish', 'pt': 'Portuguese', 'ro': 'Romanian', 'ru': 'Russian', 'sv': 'Swedish', 'th': 'Thai', 'tr': 'Turkish', 'uk': 'Ukrainian', 'ur': 'Urdu', 'vi': 'Vietnamese', 'zh-cn': 'Chinese', 'zh-tw': 'Chinese'}
     grid_data = read_grid_file('./sydGrid.json')
@@ -96,4 +114,5 @@ if __name__ == '__main__':
             else:
                 #print("break")
                 break
-    print(result_dict)
+    #print(result_dict)
+    result_output(result_dict, language_dict)
