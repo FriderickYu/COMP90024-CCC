@@ -121,6 +121,7 @@ if __name__ == '__main__':
         for i, line in enumerate(f):
             # send data to processor rank
             if i%size == rank:
+                middle_result = []
                 line = line.rstrip("]" + "[" + "," + "\n") 
                 try:
                     line_data = json.loads(line)
