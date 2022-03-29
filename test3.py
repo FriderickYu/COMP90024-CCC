@@ -137,7 +137,8 @@ if __name__ == '__main__':
                 except:
                     # continue reading even if an incorrectly formatted json statement is read
                     continue
-        middle_result_list = middle_result_list + comm.gather(middle_result, root=0)
+        if comm.gather(middle_result, root=0) != None:
+            middle_result_list = middle_result_list + comm.gather(middle_result, root=0)
     f.close()
     
     #comm.barrier()
