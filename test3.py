@@ -50,10 +50,10 @@ def filter_empty_line(line_data):
 #this function used for ditinguish which grid this line belongs to.
 def distinguish_one_line(line_data, grids, smallest_point):
    if line_data["doc"]["coordinates"]['coordinates'] == smallest_point[1]:
-       return line_data["doc"]["lang"], smallest_point[0]
+       return [line_data["doc"]["lang"], smallest_point[0]]
    for i in list(grids):
        if whether_in_grid(line_data["doc"]["coordinates"]['coordinates'], ast.literal_eval(i)):
-           return line_data["doc"]["lang"], grids[i]
+           return [line_data["doc"]["lang"], grids[i]]
    return False
    #
    #return language, grid_id
@@ -108,22 +108,42 @@ if __name__ == '__main__':
     grid_data = read_grid_file('./sydGrid.json')
     grids, smallest_point = process_grid(grid_data)
     result_dict={}
-    '''
+    # Initialize MPI
+    comm = MPI.COMM_WORLD
+
+    # get MPI size, rank, and processor name
+    size = comm.Get_size()
+    rank = comm.Get_rank()
+    name = comm.Get_name()
+    
     with open('./bigTwitter.json', 'r', encoding="utf8") as f:   
         for i, line in enumerate(f):
             # send data to processor rank
             if i%size == rank:
                 line = line.rstrip("]" + "[" + "," + "\n") 
                 try:
-                    j = json.loads(line)['rows']
-                    grid = get_tweet_grid(j['geometry']['coordinates'], grid_dict)
+                    line_data = json.loads(line)
+                    #grid = get_tweet_grid(j['geometry']['coordinates'], grid_dict)
+                    
                     # process tweets that belong within the boundaries of the grid
-                    if not grid is None:
-                        process_tweet([grid,j['properties']['text']], score_dict)
+                    if line_data["doc"]["coordinates"] != None and distinguish_one_line(line_data, grids, smallest_point) != False:
+                        middle_result = distinguish_one_line(line_data, grids, smallest_point)
+                        #result_dict = sum_the_output(result_dict, language, grid_id)
+                    else:
+                        continue
                 except:
                     # continue reading even if an incorrectly formatted json statement is read
                     continue
     f.close()
+    
+    comm.barrier()
+    middle_result_list = comm.gather(middle_result, root=0)
+    
+    if rank == 0:
+        for i in middle_result_list：
+            [language, grid_id] = i
+            result_dict = sum_the_output(result_dict, language, grid_id)
+    
     '''
     
     with open('./bigTwitter.json', 'r', encoding="utf-8") as f:
@@ -144,4 +164,5 @@ if __name__ == '__main__':
                 else:
                     continue
     #print('result_dict:', result_dict)
+    '''
     result_output(result_dict, language_dict)
