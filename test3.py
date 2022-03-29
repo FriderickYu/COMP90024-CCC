@@ -74,6 +74,33 @@ def sum_the_output(result_dict, language, grid_id):
         result_dict[grid_id] = [Total_Tweets, language_dict]
     return result_dict
 
+def process_tweets(size, rank, grids, smallest_point):
+    middle_result_list = []
+    with open('./bigTwitter.json', 'r', encoding="utf8") as f:   
+        for i, line in enumerate(f):
+            # send data to processor rank
+            if i%size == rank:
+                middle_result = []
+                line = line.rstrip("]" + "[" + "," + "\n") 
+                try:
+                    line_data = json.loads(line)
+                    #grid = get_tweet_grid(j['geometry']['coordinates'], grid_dict)
+                    
+                    # process tweets that belong within the boundaries of the grid
+                    if line_data["doc"]["coordinates"] != None and distinguish_one_line(line_data, grids, smallest_point) != False:
+                        middle_result = distinguish_one_line(line_data, grids, smallest_point)
+                        #result_dict = sum_the_output(result_dict, language, grid_id)
+                        #print(middle_result)
+                    else:
+                        continue
+                except:
+                    # continue reading even if an incorrectly formatted json statement is read
+                    continue
+            middle_result_list.append(middle_result)
+    f.close()
+    return middle_result_list
+
+
 def result_output(result_dict, language_dict):
     result_list = []
     for i in list(result_dict):
@@ -116,30 +143,12 @@ if __name__ == '__main__':
     rank = comm.Get_rank()
     name = comm.Get_name()
     
-    middle_result_list = []
-    with open('./bigTwitter.json', 'r', encoding="utf8") as f:   
-        for i, line in enumerate(f):
-            # send data to processor rank
-            if i%size == rank:
-                middle_result = []
-                line = line.rstrip("]" + "[" + "," + "\n") 
-                try:
-                    line_data = json.loads(line)
-                    #grid = get_tweet_grid(j['geometry']['coordinates'], grid_dict)
-                    
-                    # process tweets that belong within the boundaries of the grid
-                    if line_data["doc"]["coordinates"] != None and distinguish_one_line(line_data, grids, smallest_point) != False:
-                        middle_result = distinguish_one_line(line_data, grids, smallest_point)
-                        #result_dict = sum_the_output(result_dict, language, grid_id)
-                        #print(middle_result)
-                    else:
-                        continue
-                except:
-                    # continue reading even if an incorrectly formatted json statement is read
-                    continue
-        if comm.gather(middle_result, root=0) != None:
-            middle_result_list = middle_result_list + comm.gather(middle_result, root=0)
-    f.close()
+    
+    
+    
+    middle_result_list = process_tweets(size, rank, grids, smallest_point)
+    middle_result_list = comm.gather(middle_result_list, root=0)
+    print(middle_result_list)
     
     #comm.barrier()
     #middle_result_list = comm.gather(middle_result, root=0)
