@@ -99,7 +99,7 @@ def result_output(result_dict, language_dict):
     pd.set_option('display.colheader_justify', 'center')
     pd.set_option('max_colwidth', 200)
     df = pd.DataFrame(result_list, columns=["Cell", "#Total Tweets", "#Number of language used", "#Top 10 Languages & #Tweets"])
-    # 行索引从1开始（原来的索引+1）
+    # indexing from 1
     df.index = df.index + 1
     print(df)
 
