@@ -157,6 +157,7 @@ if __name__ == '__main__':
         print('middle_result_list:',middle_result_list)
         result_dict={}
         for i in middle_result_list:
+            print(middle_result_list[i],i)
             if i != None:
                 [language, grid_id] = i
                 result_dict = sum_the_output(result_dict, language, grid_id)
