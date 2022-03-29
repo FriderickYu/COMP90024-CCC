@@ -146,19 +146,19 @@ if __name__ == '__main__':
     
     
     
-    comm.barrier()
-    middle_result_list = process_tweets(size, rank, grids, smallest_point)
-    middle_result_list = comm.gather(middle_result_list, root=0)
-    print(middle_result_list)
+#     comm.barrier()
+#     middle_result_list = process_tweets(size, rank, grids, smallest_point)
+#     middle_result_list = comm.gather(middle_result_list, root=0)
+#     print(middle_result_list)
     
-    #comm.barrier()
-    #middle_result_list = comm.gather(middle_result, root=0)
+#     #comm.barrier()
+#     #middle_result_list = comm.gather(middle_result, root=0)
     
-    result_dict={}
-    if rank == 0:
-        for i in middle_result_list:
-            [language, grid_id] = i
-            result_dict = sum_the_output(result_dict, language, grid_id)
+#     result_dict={}
+#     if rank == 0:
+#         for i in middle_result_list:
+#             [language, grid_id] = i
+#             result_dict = sum_the_output(result_dict, language, grid_id)
     
     '''
     
@@ -181,4 +181,18 @@ if __name__ == '__main__':
                     continue
     #print('result_dict:', result_dict)
     '''
-    result_output(result_dict, language_dict)
+    if rank == 0:
+        comm.barrier()
+        middle_result_list = process_tweets(size, rank, grids, smallest_point)
+        middle_result_list = comm.gather(middle_result_list, root=0)
+        print(middle_result_list)
+    
+    #comm.barrier()
+    #middle_result_list = comm.gather(middle_result, root=0)
+    
+        result_dict={}
+        if rank == 0:
+            for i in middle_result_list:
+                [language, grid_id] = i
+                result_dict = sum_the_output(result_dict, language, grid_id)
+        result_output(result_dict, language_dict)
