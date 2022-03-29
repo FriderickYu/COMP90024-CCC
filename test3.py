@@ -141,7 +141,7 @@ if __name__ == '__main__':
     
     result_dict={}
     if rank == 0:
-        for i in middle_result_list：
+        for i in middle_result_list:
             [language, grid_id] = i
             result_dict = sum_the_output(result_dict, language, grid_id)
     
