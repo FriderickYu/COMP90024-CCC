@@ -109,13 +109,13 @@ if __name__ == '__main__':
     grids, smallest_point = process_grid(grid_data)
     result_dict={}
     '''
-    with open('bigTwitter.json', 'r', encoding="utf8") as f:   
+    with open('./bigTwitter.json', 'r', encoding="utf8") as f:   
         for i, line in enumerate(f):
             # send data to processor rank
             if i%size == rank:
                 line = line.rstrip("]" + "[" + "," + "\n") 
                 try:
-                    j = json.loads(line)['value']
+                    j = json.loads(line)['rows']
                     grid = get_tweet_grid(j['geometry']['coordinates'], grid_dict)
                     # process tweets that belong within the boundaries of the grid
                     if not grid is None:
