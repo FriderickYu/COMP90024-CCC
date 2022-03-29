@@ -181,11 +181,13 @@ if __name__ == '__main__':
                     continue
     #print('result_dict:', result_dict)
     '''
-    comm.barrier()
+    
     middle_result_list = process_tweets(size, rank, grids, smallest_point)
     middle_result_list = comm.gather(middle_result_list, root=0)
     print(middle_result_list)
-        
+    
+    comm.barrier()
+    
     if rank == 0:
         #comm.barrier()
         
