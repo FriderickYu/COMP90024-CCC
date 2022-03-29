@@ -91,14 +91,15 @@ def process_tweets(size, rank, grids, smallest_point):
                         middle_result = distinguish_one_line(line_data, grids, smallest_point)
                         #result_dict = sum_the_output(result_dict, language, grid_id)
                         #print(middle_result)
+                        return middle_result
                     else:
                         continue
                 except:
                     # continue reading even if an incorrectly formatted json statement is read
                     continue
-            middle_result_list.append(middle_result)
+            #middle_result_list.append(middle_result)
     f.close()
-    return middle_result_list
+    #return middle_result_list
 
 
 def result_output(result_dict, language_dict):
@@ -145,7 +146,7 @@ if __name__ == '__main__':
     
     
     
-    
+    comm.barrier()
     middle_result_list = process_tweets(size, rank, grids, smallest_point)
     middle_result_list = comm.gather(middle_result_list, root=0)
     print(middle_result_list)
