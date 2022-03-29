@@ -116,6 +116,7 @@ if __name__ == '__main__':
     rank = comm.Get_rank()
     name = comm.Get_name()
     
+    middle_result_list = []
     with open('./bigTwitter.json', 'r', encoding="utf8") as f:   
         for i, line in enumerate(f):
             # send data to processor rank
@@ -129,15 +130,17 @@ if __name__ == '__main__':
                     if line_data["doc"]["coordinates"] != None and distinguish_one_line(line_data, grids, smallest_point) != False:
                         middle_result = distinguish_one_line(line_data, grids, smallest_point)
                         #result_dict = sum_the_output(result_dict, language, grid_id)
+                        #print(middle_result)
                     else:
                         continue
                 except:
                     # continue reading even if an incorrectly formatted json statement is read
                     continue
+            middle_result_list = middle_result_list + comm.gather(middle_result, root=0)
     f.close()
     
-    comm.barrier()
-    middle_result_list = comm.gather(middle_result, root=0)
+    #comm.barrier()
+    #middle_result_list = comm.gather(middle_result, root=0)
     
     result_dict={}
     if rank == 0:
