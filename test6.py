@@ -187,7 +187,7 @@ if __name__ == '__main__':
                      'ta': 'Tamil', 'te': 'Telugu', 'tg': 'tajik',
                      'tk': 'Turkmen', 'tn': 'Setswana', 'tt': 'Tatar', 'tzm': 'Tamazight', 'ug': 'Uyghur',
                      'uz': 'Uzbek', 'wo': 'Wolof', 'xh': 'isiXhosa', 'yo': 'Yoruba',
-                     'zu': 'isiZulu'}
+                     'zu': 'isiZulu', 'tl': 'Tagalog', 'ht': 'Haitian', 'zh': 'Chinese'}
     grid_data = read_grid_file('./sydGrid.json')
 
     grids, smallest_point = process_grid(grid_data)
