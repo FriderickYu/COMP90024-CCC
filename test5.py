@@ -30,6 +30,10 @@ def read_whole_twitter_file(twitter_file_path):
         data = json.load(f)
     return data
 
+# 将json中的id换成对应的网格名称
+# grid_name = ["B4", "C4", "D4", "A3", "B3", "C3", "D3", "A2", "B2", "C2", "D2", "A1", "B1", "C1", "D1", "A4"]
+# for i in range(len(grid_name)):
+#     sydGrid["features"][i]['properties']['id'] = grid_name[i]
 
 def process_grid(grid_data):
     grids = {}
@@ -151,7 +155,7 @@ if __name__ == '__main__':
                      'se': 'Sami (Northern)', 'si': 'Sinhala', 'sk': 'Slovak', 'sl': 'Slovenian', 'sma': 'Sami (Southern)', 'smj': 'Sami (Lule)', 'smn': 'Sami (Inari)',
                      'sms': 'Sami (Inari)', 'sq': 'Albanian', 'sr': 'Serbian', 'sw': 'Kiswahili', 'syr': 'Syriac', 'ta': 'Tamil', 'te': 'Telugu', 'tg': 'tajik',
                      'tk': 'Turkmen', 'tn': 'Setswana', 'tt': 'Tatar', 'tzm': 'Tamazight', 'ug': 'Uyghur', 'uz': 'Uzbek', 'wo': 'Wolof', 'xh': 'isiXhosa', 'yo': 'Yoruba',
-                     'zu': 'isiZulu	'}
+                     'zu': 'isiZulu'}
     grid_data = read_grid_file('./sydGrid.json')
     grids, smallest_point = process_grid(grid_data)
     result_dict={}
