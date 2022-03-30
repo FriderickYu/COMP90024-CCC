@@ -132,7 +132,26 @@ def result_output(result_dict, language_dict):
     print(df)
 
 if __name__ == '__main__':
-    language_dict = {'en': 'English', 'ar': 'Arabic', 'bn': 'Bengali', 'cs': 'Czech', 'da': 'Danish', 'de': 'German', 'el': 'Greek','es': 'Spanish', 'fa': 'Persian', 'fi': 'Finnish', 'fil': 'Filipino', 'fr': 'French', 'he': 'Hebrew', 'hi': 'Hindi', 'hu': 'Hungarian', 'id': 'Indonesian', 'it': 'Italian', 'ja': 'Japanese', 'ko': 'Korean', 'msa': 'Malay', 'nl': 'Dutch', 'no': 'Norwegian', 'pl': 'Polish', 'pt': 'Portuguese', 'ro': 'Romanian', 'ru': 'Russian', 'sv': 'Swedish', 'th': 'Thai', 'tr': 'Turkish', 'uk': 'Ukrainian', 'ur': 'Urdu', 'vi': 'Vietnamese', 'zh-cn': 'Chinese', 'zh-tw': 'Chinese'}
+    language_dict = {'en': 'English', 'ar': 'Arabic', 'bn': 'Bengali', 'cs': 'Czech', 'da': 'Danish', 'de': 'German',
+                     'el': 'Greek', 'es': 'Spanish', 'fa': 'Persian', 'fi': 'Finnish', 'fil': 'Filipino',
+                     'fr': 'French', 'he': 'Hebrew', 'hi': 'Hindi', 'hu': 'Hungarian', 'id': 'Indonesian', 'in': 'Indonesian',
+                     'it': 'Italian', 'ja': 'Japanese', 'ko': 'Korean', 'msa': 'Malay', 'nl': 'Dutch',
+                     'no': 'Norwegian', 'pl': 'Polish', 'pt': 'Portuguese', 'ro': 'Romanian', 'ru': 'Russian',
+                     'sv': 'Swedish', 'th': 'Thai', 'tr': 'Turkish', 'uk': 'Ukrainian', 'ur': 'Urdu',
+                     'vi': 'Vietnamese', 'zh-cn': 'Chinese', 'zh-tw': 'Chinese', 'af': 'Afrikaans', 'am': 'Amharic',
+                     'arn': 'Mapudungun', 'as': 'Assamese', 'az': 'Azeri', 'ba': 'Bashkir', 'be': 'Belarusian', 'bg': 'Bulgarian',
+                     'bo': 'Tibetan', 'br': 'Breton', 'bs': 'Bosnian', 'ca': 'Catalan', 'co': 'Corsican', 'cy': 'Welsh', 'dsb': 'Lower Sorbian',
+                     'dv': 'Divehi', 'et': 'Estonian', 'eu': 'Basque', 'fo': 'Faroese', 'fy': 'Frisian', 'ga': 'Irish', 'gd': 'Scottish Gaelic',
+                     'gl': 'Galician', 'gsw': 'Alsatian', 'gu': 'Gujarati', 'ha': 'Hausa', 'hr': 'Croatian', 'hsb': 'Upper Sorbian', 'hy': 'Armenian',
+                     'ig': 'Igbo', 'ii': 'Yi', 'is': 'Icelandic', 'iu': 'Inuktitut', 'ka': 'Georgian', 'kk': 'Kazakh', 'kl': 'Greenlandic', 'km': 'Khmer',
+                     'kn': 'Kannada', 'kok': 'Konkani', 'ky': 'Kyrgyz', 'lb': 'Luxembourgish', 'lo': 'Lao', 'lt': 'Lithuanian', 'lv': 'Latvian', 'mi': 'Maori',
+                     'mk': 'Macedonian', 'ml': 'Malayalam', 'mn': 'Mongolian', 'moh': 'Mohawk', 'mr': 'Marathi', 'ms': 'Malay', 'mt': 'Maltese', 'my': 'Burmese',
+                     'nb': 'Norwegian (Bokmål)', 'ne': 'Nepali', 'nn': 'Norwegian (Nynorsk)', 'nso': 'Sesotho', 'oc': 'Occitan', 'or': 'Oriya', 'pa': 'Punjabi',
+                     'prs': 'Dari', 'ps': 'Pashto', 'qut': 'K\'iche', 'quz': 'Quechua', 'rm': 'Romansh', 'rw': 'Kinyarwanda', 'sa': 'Sanskrit', 'sah': 'Yakut',
+                     'se': 'Sami (Northern)', 'si': 'Sinhala', 'sk': 'Slovak', 'sl': 'Slovenian', 'sma': 'Sami (Southern)', 'smj': 'Sami (Lule)', 'smn': 'Sami (Inari)',
+                     'sms': 'Sami (Inari)', 'sq': 'Albanian', 'sr': 'Serbian', 'sw': 'Kiswahili', 'syr': 'Syriac', 'ta': 'Tamil', 'te': 'Telugu', 'tg': 'tajik',
+                     'tk': 'Turkmen', 'tn': 'Setswana', 'tt': 'Tatar', 'tzm': 'Tamazight', 'ug': 'Uyghur', 'uz': 'Uzbek', 'wo': 'Wolof', 'xh': 'isiXhosa', 'yo': 'Yoruba',
+                     'zu': 'isiZulu	'}
     grid_data = read_grid_file('./sydGrid.json')
     grids, smallest_point = process_grid(grid_data)
     result_dict={}
