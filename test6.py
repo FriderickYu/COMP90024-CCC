@@ -20,9 +20,7 @@ def whether_in_grid(point, grid):
         return True
 
 
-# this function need to return only the "rows" dict
-# need to get ride of the first line because it is useless
-# when read json line, get rid of ',' at the end and add r at begaining. use json.loads()
+# this function read all the grid file data
 def read_grid_file(grid_file_path):
     with open(str(grid_file_path), 'r', encoding="utf-8") as g:
         grid_data = json.load(g)
@@ -46,12 +44,6 @@ def process_grid(grid_data):
     return grids, smallest_point
 
 
-'''
-def filter_empty_line(line_data):
-    if line_data["doc"]["coordinates"] != None:
-        return line_data
-'''
-
 
 # this function used for ditinguish which grid this line belongs to.
 def distinguish_one_line(line_data, grids, smallest_point):
@@ -61,7 +53,6 @@ def distinguish_one_line(line_data, grids, smallest_point):
         if whether_in_grid(line_data["doc"]["coordinates"]['coordinates'], ast.literal_eval(i)):
             return [line_data["doc"]["lang"], grids[i]]
     return False
-    #
     # return language, grid_id
 
 
@@ -87,7 +78,6 @@ def process_tweets(size, rank, grids, smallest_point, middle_result_list):
         for i, line in enumerate(f):
             # send data to processor rank
             if i % size == rank:
-                # print('rank:', i)
                 middle_result = []
                 line = line.rstrip("]" + "[" + "," + "\n")
                 try:
@@ -95,17 +85,12 @@ def process_tweets(size, rank, grids, smallest_point, middle_result_list):
                     if line_data["doc"]["coordinates"] != None and distinguish_one_line(line_data, grids,
                                                                                         smallest_point) != False:
                         middle_result = distinguish_one_line(line_data, grids, smallest_point)
-                        # result_dict = sum_the_output(result_dict, language, grid_id)
-                        # print('middle_result:', middle_result)
-                        # return middle_result
                         middle_result_list.append(middle_result)
                     else:
                         continue
                 except:
                     # continue reading even if an incorrectly formatted json statement is read
                     continue
-            # middle_result_list.append(middle_result)
-        # print('middle_result_list(in function):', middle_result_list)
         return middle_result_list
     f.close()
     # return middle_result_list
@@ -198,7 +183,6 @@ if __name__ == '__main__':
     # get MPI size, rank, and processor name
     size = comm.Get_size()
     rank = comm.Get_rank()
-    # name = comm.Get_name()
 
     middle_result_list = []
 
