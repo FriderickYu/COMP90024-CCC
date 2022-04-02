@@ -185,16 +185,14 @@ if __name__ == '__main__':
     rank = comm.Get_rank()
 
     middle_result_list = []
-
+    # the function to process tweets
     middle_result_list = process_tweets(size, rank, grids, smallest_point, middle_result_list)
-    # print('middle_result_list(after return):', middle_result_list)
+    # gather all the data returned from each rank
     middle_result_list = comm.gather(middle_result_list, root=0)
-    # print('middle_result_list(after gather):', middle_result_list)
 
     comm.barrier()
 
     if rank == 0:
-        # print('middle_result_list:',middle_result_list)
         result_dict = {}
         for i in middle_result_list:
             if i != None and i != []:
