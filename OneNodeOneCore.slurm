@@ -1,8 +1,8 @@
 #!/bin/bash
-#SBATCH --partition=snowy
+#SBATCH --partition=interactive
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --time=0-02:00:00
+#SBATCH --time=0-00:10:00
 #SBATCH --output=1n1c.out
 #SBATCH --error=1n1c.err
 
@@ -14,5 +14,5 @@ module load python/3.7.4
 module load numpy/1.18.0-python-3.7.4
 
 
-time srun -n 1 python3 test.py
+time srun -n 1 python3 ass1.py
 echo "Completed!...................................."
