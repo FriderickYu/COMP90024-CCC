@@ -12,3 +12,5 @@
 [MPI Tutorial](https://mpitutorial.com/tutorials/mpi-introduction/zh_cn/)
 
 [slurm官方文档](https://docs.slurm.cn/users/kuai-su-ru-men-yong-hu-zhi-nan)
+
+[slurm油管视频](https://www.youtube.com/watch?v=NH_Fb7X6Db0)
