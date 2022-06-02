@@ -10,3 +10,5 @@
 [上交HPC文档](https://docs.hpc.sjtu.edu.cn/index.html)
 
 [MPI Tutorial](https://mpitutorial.com/tutorials/mpi-introduction/zh_cn/)
+
+[slurm官方文档](https://docs.slurm.cn/users/kuai-su-ru-men-yong-hu-zhi-nan)
